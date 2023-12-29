@@ -5,6 +5,7 @@ import https from 'node:https'
 import http from 'node:http'
 
 import siteRoutes from './routes/site'
+import adminRoutes from './routes/admin'
 import { requestIntercepter } from './utils/requestIntercepter'
 
 const app = express()
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.all('*', requestIntercepter)
 
+app.use('/admin', adminRoutes)
 app.use('/', siteRoutes)
 
 
