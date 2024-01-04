@@ -22,7 +22,7 @@ CREATE TABLE "EventGroup" (
 CREATE TABLE "EventPeople" (
     "id" SERIAL NOT NULL,
     "id_event" INTEGER NOT NULL,
-    "Id_group" INTEGER NOT NULL,
+    "id_group" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
     "matched" TEXT NOT NULL DEFAULT '',
@@ -37,4 +37,4 @@ ALTER TABLE "EventGroup" ADD CONSTRAINT "EventGroup_id_event_fkey" FOREIGN KEY (
 ALTER TABLE "EventPeople" ADD CONSTRAINT "EventPeople_id_event_fkey" FOREIGN KEY ("id_event") REFERENCES "Event"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "EventPeople" ADD CONSTRAINT "EventPeople_Id_group_fkey" FOREIGN KEY ("Id_group") REFERENCES "EventGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "EventPeople" ADD CONSTRAINT "EventPeople_id_group_fkey" FOREIGN KEY ("id_group") REFERENCES "EventGroup"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

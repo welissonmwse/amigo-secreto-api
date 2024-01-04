@@ -31,10 +31,10 @@ model EventGroup {
 model EventPeople {
   id       Int         @id @default(autoincrement())
   id_event Int
-  Id_group Int
+  id_group Int
   name     String
   cpf      String
   matched  String      @default("")
   event    Event?      @relation(fields: [id_event], references: [id])
-  group    EventGroup? @relation(fields: [Id_group], references: [id])
+  group    EventGroup? @relation(fields: [id_group], references: [id])
 }
