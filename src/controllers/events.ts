@@ -1,7 +1,8 @@
 import { RequestHandler } from "express";
+import { z } from "zod";
 
 import * as events from '../services/events'
-import { z } from "zod";
+import * as people from '../services/people'
 
 export const getAll: RequestHandler = async (req, res) => {
   const items = await events.getAll()
@@ -18,15 +19,6 @@ export const getEvent: RequestHandler = async (req, res) => {
 
   return res.json({ error: "Ocorreu um erro" })
 }
-/*
-
-
-  title
-  description
-  grouped
-  EventGroup
-  EventPeople
-*/
 
 export const createEvent: RequestHandler = async (req, res) => {
   const createEventSchema = z.object({
@@ -64,9 +56,10 @@ export const updateEvent: RequestHandler = async (req, res) => {
 
   if (updateEvent) {
     if (updateEvent.status) {
-
+      const result = await events.doMatches(+id)
+      if (!result) return res.json({ error: ' Grupo impossíveis de sortear' })
     } else {
-
+      await people.update({ id_event: +id }, { matched: '' })
     }
 
     return res.json({ event: updateEvent })
